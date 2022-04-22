@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const User = require('../models/userModel')
 
+//private 
 const getUsers = asyncHandler(async(req, res) =>{
    
 
@@ -23,10 +24,9 @@ const loginUser = asyncHandler(async(req, res)=>{
     })
   }else{
     res.status(400)
-    throw new Error('invalid user data')
+    throw new Error('invalid data')
   }
    
-     res.json({message: 'login user success'})
 })
 
 const registerUser = asyncHandler(async(req, res)=>{
@@ -65,6 +65,12 @@ const registerUser = asyncHandler(async(req, res)=>{
         throw new Error('Invalid user data')
       }
 })
+
+const generateToken = ( id ) =>{
+  return jwt.sign({id}, process.env.JWT_SECRET, {
+    expiresIn: '30d'
+  })
+}
 
 module.exports = 
 {

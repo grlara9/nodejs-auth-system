@@ -7,7 +7,7 @@ const User = require('../models/userModel')
 const getUsers = asyncHandler(async(req, res) =>{
    
 
-    res.status(200).json({message: 'get users'})
+    res.status(200).json(req.user)
 })
 
 const loginUser = asyncHandler(async(req, res)=>{
@@ -20,7 +20,8 @@ const loginUser = asyncHandler(async(req, res)=>{
     res.json({
       _id: user.id,
       name: user.name,
-      email: user.email
+      email: user.email,
+      token: generateToken(user._id)
     })
   }else{
     res.status(400)

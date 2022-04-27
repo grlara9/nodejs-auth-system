@@ -4,13 +4,13 @@ const User = require('../models/userModel')
 
 const protect = asyncHandler(async(req, res, next)=>{
     let token;
-
+      //check headers for authorization and see if stars with Bearer 
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith('Bearer')
       ) {
         try {
-          // Get token from header
+          // Get token from Bearer header, get only the token index 1
           token = req.headers.authorization.split(' ')[1]
     
           // Verify token
